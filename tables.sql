@@ -75,19 +75,27 @@ VALUES(1,2),
 (10,8),
 (10,5);
 
+--SQL query to see the albums and the tracks that belong to that album.
+
 SELECT A.album_name, T.track_name
 FROM albums AS A
 INNER JOIN albums_tracks AS AT 
 ON A.album_id = AT.album_id
 INNER JOIN tracks AS T 
-ON T.track_id = AT.track_id;
+ON T.track_id = AT.track_id
+ORDER BY A.album_name ASC;
+
+--SQL query to see the album or albums that each track belongs to
 
 SELECT T.track_name, A.album_name
 FROM tracks AS T 
 INNER JOIN albums_tracks AS AT 
 ON T.track_id = AT.track_id
 INNER JOIN albums AS A 
-ON A.album_id = AT.album_id;
+ON A.album_id = AT.album_id
+ORDER BY T.track_name ASC;
+
+--query to see the number of songs an album has.
 
 SELECT A.album_name, COUNT(T.track_id) AS Number_of_tracks
 From albums AS A
@@ -96,6 +104,8 @@ ON A.album_id = AT.album_id
 INNER JOIN tracks AS T 
 ON T.track_id = AT.track_id
 GROUP BY A.album_name;
+
+--query to see how many albums a particular track is included on.
 
 SELECT T.track_name,COUNT(A.album_id) AS Number_of_albums
 FROM tracks AS T 
